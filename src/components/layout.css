@@ -117,6 +117,6 @@ body {
 .account-card {
     background: var(--surface-color);
     padding: 24px;
-    border-radius: 8px;
+    border-radius: 9px;
     border: 1px solid #DEE2E6;
 }
