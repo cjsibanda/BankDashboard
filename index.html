@@ -16,7 +16,7 @@
         <span class="logo-text">Sibanda<span class="logo-sub">Banking</span></span>
       </div>
       <div class="header-actions">
-        <span>Welcome, Mr Sibanda</span>
+        <span>Welcome, Mr. Sibanda</span>
         <button class="logout-btn">Sign Out</button>
       </div>
     </header>
@@ -37,11 +37,33 @@
 
       <!-- Main Content -->
       <main class="app-main">
+        <h2>Accounts Overview</h2>
+        <p style="color: var(--text-muted);">Manage your primary balances and assets in Sibanda-banking.</p>
 
+        <div class="dashboard-grid">
+          <div class="account-card">
+            <h4 style="margin: 0 0 8px; color: var(--text-muted);">Primary Checking (...1234)</h4>
+            <p style="font-size: 1.75rem; font-weight: bold; margin: 0; color: var(--primary-color);">$8,567.25</p>
+            <span style="font-size: 0.85rem; color: var(--accent-color);">Available Balance</span>
+          </div>
+
+          <div class="account-card">
+            <h4 style="margin: 0 0 8px 0; color: var(--text-muted);">Platinum Credit Card (...9876)</h4>
+            <p style="font-size: 1.75rem; font-weight: bold; margin: 0; color: var(--danger-color);">-$100.50</p>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Current Statement Balance</span>
+          </div>
+        </div>
       </main>
 
+      <!-- Right Panel -->
+      <aside class="app-right-panel">
+        <div class="info-card">
+          <h4>Security Status</h4>
+          <p class="status-secure">Protected & Encrypted</p>
+          <small>Modular Preview Mode</small>
+        </div>
+      </aside>
     </div>
-
   </div>
 </body>
 </html>
