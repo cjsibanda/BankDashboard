@@ -2,9 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sibanda Banking Dashboard</title>
+  <!-- Linking seperated stylesheets ---->
+  <link rel="stylesheet" href="./src/styles/variables.css">
+  <link rel="stylesheet" href="./src/components/layout.css">
 </head>
 <body>
+  <div class="app-container">
+    <!-- Header with Top-Left Logo -->
+    <header class="app-header">
+      <div class="logo-container">
+        <span class="logo-text">Sibanda<span class="logo-sub">Banking</span></span>
+      </div>
+      <div class="header-actions">
+        <span>Welcome, Mr Sibanda</span>
+        <button class="logout-btn">Sign Out</button>
+      </div>
+    </header>
 
+    <!-- Body Layout -->
+    <div class="app-body">
+      <!-- Sidebar -->
+      <aside class="app-sidebar">
+        <nav>
+          <ul>
+            <li class="active">Accounts</li>
+            <li>Transfer & Pay</li>
+            <li>Investments</li>
+            <li>Statements</li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="app-main">
+
+      </main>
+
+    </div>
+
+  </div>
 </body>
 </html>
