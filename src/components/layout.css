@@ -1,0 +1,9 @@
+:root {
+    --primary-color: #0F2537; /* Deep Slate*/
+    --accent-color: #007A5E; /* Emerald/Tealish */
+    --bg-color: #F8F9FA; /* Light Background */
+    --surfaced-color: #FFFFFF; /* for pure wite cards */
+    --text-main: #212529; /* for dark Text */
+    --text-muted: #6C757D; /*  Gray */
+    --danger-color: #C92A2A; /* Red color for debit */
+}
