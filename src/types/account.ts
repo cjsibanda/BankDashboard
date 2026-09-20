@@ -1,4 +1,4 @@
-export type AccountType = 'CHECKING' | 'SAVINGS' | 'CREDIT_CARD' | 'INVESTENT' | 'MORTGAGE';
+export type AccountType = 'CHECKING' | 'SAVINGS' | 'CREDIT_CARD' | 'INVESTMENT' | 'MORTGAGE';
 
 export interface Account {
     id: string;
@@ -7,5 +7,5 @@ export interface Account {
     type: AccountType;
     balanceCents: number; //Stored as integer cents (avoid precision bugs)
     currency: 'CAD' | 'USD';
-    vailableBalanceCents?: number;
+    availableBalanceCents?: number;
 }
