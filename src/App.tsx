@@ -25,6 +25,14 @@ const MOCK_ACCOUNTS: Account[] = [
     balanceCents: -10050,
     currency: 'CAD',
   },
+  {
+    id: 'sibanda_3',
+    accountNumberMasked: '....5544',
+    nickname: 'Express Credit Card',
+    type: 'CREDIT CARD',
+    balanceCents: -500,
+    currency: CAD',
+  }
 ];
 
 export const App: react.FC = () => {
