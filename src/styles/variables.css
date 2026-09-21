@@ -1,9 +1,9 @@
 :root {
-    --primary-color: #0F2537;    /* Deep Slate */
-    --accent-color: #007A5E;     /* Professional Emerald/Teal */
+    --primary-color: #143a59;    /* Deep Slatish */
+    --accent-color: #088568;     /* Professional Emerald/Teal */
     --bg-color: #F8F9FA;         /* Light Background */
     --surface-color: #FFFFFF;    /* Pure White Cards */
     --text-main: #212529;        /* Dark Text */
     --text-muted: #6C757D;       /* Muted Gray */
-    --danger-color: #C92A2A;     /* Red for debits */
+    --danger-color: #de2626;     /* Red for debits */
 }
