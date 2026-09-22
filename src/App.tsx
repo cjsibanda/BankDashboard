@@ -4,7 +4,7 @@
 ///////////////////////////////////////////
 import React, {useState} from 'react';
 import { Account } from './types/account';
-// sidebar
+import { Sidebar } from './components/layout/Sidebar';
 // coponents
 
 const MOCK_ACCOUNTS: Account[] = [
@@ -20,7 +20,7 @@ const MOCK_ACCOUNTS: Account[] = [
   {
     id: 'sibanda_2',
     accountNumberMasked: '...9876',
-    nickname: 'Platnum Credit Card',
+    nickname: 'Platinum Credit Card',
     type: 'CREDIT_CARD',
     balanceCents: -10050,
     currency: 'CAD',
@@ -42,12 +42,20 @@ export const App: react.FC = () => {
     <div>
       {/* The Header*/}
       <header>
-        //The header
+        <div className="flex items-center">
+          <span>
+            SIBANDA<span className="bg-white emerald-800">BANKING</span>
+          </span>
+        </div>
+        <div className="flex items-center gap-4 text-sm">
+          <span>Hello, Mr. Sibanda </span>
+          <button>Sign Out</button>
+        </div>
       </header>
 
       {/* Main Container*/}
       <div>
-        <Sidebar activeTab={activeTab}/>
+        <Sidebar activeTab={activeTab} onSelectTab={setActiveTab} />
 
         {/* Content Area */}
         <main>
