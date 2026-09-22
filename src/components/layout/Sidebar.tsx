@@ -21,6 +21,28 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 
-
-
+export const Sidebar: React.FC<sidebarProps> = ({activeTab, onSelectTab}) => {
+  return (
+    <aside>
+      <nav>
+        <ul>
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeTab === item.id;
+            return (
+              <li key={item.id}>
+                <button
+                  onclick={() => onSelectTab(item.id)}
+                  aria-current={isActive ? 'page' : undefined}
+                  
+                  >
+                  {item.label}
+                </button>
+              </li>
+            )
+          })}
+        </ul>
+      </nav>
+    </aside>
+  )
+}
 
