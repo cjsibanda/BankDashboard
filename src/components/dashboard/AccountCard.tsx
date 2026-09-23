@@ -22,6 +22,32 @@ export const AccountCard: React.FC<AccountCardProps> = ({ account, onClick}) => 
           {account.nickname} <span className="text-slate-400">({account.accountNumberMasked})</span>
         </h3>
       </div>
+
+      <p
+        className={`text-2xl font-bold tracking-tight mb-1 ${
+          isNegative ? 'text-red-600' : 'text-slate-900'
+        }`}
+        aria-live="polite"
+      >
+        {formatCurrency(account.balanceCents, account.currency)}
+      </p>
+
+      {account.availableBalanceCents !== underfined && (
+        <span className="text-xs font-semibold text-emerald-700 block">
+          Available: {formatCurrency(account.availableBalanceCents, account.currency)}
+        </span>
+      )}  
+
+      {onClick && (
+        <button
+          onclick={() => onClick(account.id)}
+          className="mt-4 text-xs font-medium text-emerald-700"
+        >
+         View Activity <span className="sr-only">for {account.nickname}</span> 
+        </button>
+      );
+        
+      }
       
     </div>
   )
