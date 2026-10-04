@@ -1,5 +1,5 @@
 import React from 'react';
-import { Account } from '../../types/account';
+import type { Account } from '../../types/account';
 import { formatCurrency } from '../../utils/formatters';
 
 interface AccountCardProps {
