@@ -51,6 +51,12 @@ export function App() {
             Sibanda<span className="bg-white text-emerald-800 text-xs px-1.5 py-0.5 rounded ml-1.5 font-extrabold">BANKING</span>
           </span>
         </div>
+        <div className="flex items-center gep-4 text-sm">
+          <span>Hello, Mr. Sibanda</span>
+          <button>
+            Sign Out
+          </button>
+        </div>
       </header>
 
       {/* Main Content */}
