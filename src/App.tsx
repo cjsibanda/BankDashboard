@@ -64,7 +64,7 @@ export function App() {
         <Sidebar activeTab={activeTab} onSelectTab={setActiveTab} />
 
         {/* Content Area */}
-        <main>
+        <main className="flex-1 p-8 overflow-y-auto">
           {selectedAccount ? (
             <TransactionTable
               account={selectedAccount}
@@ -73,11 +73,11 @@ export function App() {
             />
           ) : (
             <>
-              <header>
-                <h1>Accounts Overview</h1>
-                <p>Manage your primary balances and assets in Sibanda Banking.</p>
+              <header className="mb-6">
+                <h1 className="text-2xl font-bold text-slate-900">Accounts Overview</h1>
+                <p className="text-sm text-slate-500">Manage your primary balances and assets in Sibanda Banking.</p>
               </header>
-              <section>
+              <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {MOCK_ACCOUNTS.map((account) => (
                   <AccountCard
                     key={account.id}
