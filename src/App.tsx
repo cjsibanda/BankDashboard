@@ -43,9 +43,9 @@ export function App() {
   const currentTransactions = selectedAccountId ? MOCK_TRANSACTIONS[selectedAccountId] || [] : [];
 
   return (
-    <div>
+    <div className="flex flex-col h-screen bg-slate-50 text-slate-900 font-sans">
       {/*Header*/}
-      <header>
+      <header className="h-16 bg-slate-900 text-white flex justify-between items-center px-6 shadow-md z-10">
         <div></div>
       </header>
 
