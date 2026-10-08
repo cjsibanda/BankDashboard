@@ -53,7 +53,7 @@ export function App() {
         </div>
         <div className="flex items-center gep-4 text-sm">
           <span>Hello, Mr. Sibanda</span>
-          <button>
+          <button className="border border-white/45 hover:bg-white/10 text-white px-3 py-1.5 rounded transition-colors text-xs font-semibold" >
             Sign Out
           </button>
         </div>
