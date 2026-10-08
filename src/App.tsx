@@ -60,7 +60,7 @@ export function App() {
       </header>
 
       {/* Main Content */}
-      <div>
+      <div className="flex flex-1 overflow-hidden">
         <Sidebar activeTab={activeTab} onSelectTab={setActiveTab} />
 
         {/* Content Area */}
@@ -68,13 +68,25 @@ export function App() {
           {selectedAccount ? (
             <TransactionTable
               account={selectedAccount}
-              transactions={currentTransactions}
+              transitions={currentTransactions}
               onBack={() => setSelectedAccountId(null)}
             />
-          ): (
+          ) : (
             <>
-              <header></header>
-              <section></section>
+              <header>
+                <h1>Accounts Overview</h1>
+                <p>Manage your primary balances and assets in Sibanda Banking.</p>
+              </header>
+              <section>
+                {MOCK_ACCOUNTS.map((account) => (
+                  <AccountCard
+                    key={account.id}
+                    account={account}
+                    onClick={(id) => setSelectedAccountId(id)}
+                  />
+                ))}
+              </section>
+              </>
           )}
         </main>
 
