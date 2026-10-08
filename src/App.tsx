@@ -13,7 +13,7 @@ const MOCK_ACCOUNTS: Account[] = [
     type: 'CHECKING',
     balanceCents: 856725,
     currency: 'CAD',
-    availableBalanceCents: 900000
+    availableBalanceCents: 906070
   },
   {
     id: 'acc_2',
@@ -23,7 +23,17 @@ const MOCK_ACCOUNTS: Account[] = [
     balanceCents: -10050,
     currency: 'CAD'
   },
+  {
+    id: 'acc_3',
+    accountNumberMasked: '...5076',
+    nickname: 'Diamond Access Card',
+    type: 'CREDIT_CARD',
+    balanceCents: -2267,
+    currency: 'CAD',
+  },
 ];
+
+
 
 export function App() {
   const [activeTab, setActiveTab] = useState('accounts');
