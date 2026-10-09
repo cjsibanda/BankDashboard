@@ -28,7 +28,7 @@ const MOCK_ACCOUNTS: Account[] = [
     accountNumberMasked: '...5075',
     nickname: 'Diamond Access Card',
     type: 'CREDIT_CARD',
-    balanceCents: -20550,
+    balanceCents: -200550,
     currency: 'CAD',
   },
 ];
