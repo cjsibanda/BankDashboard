@@ -1,4 +1,4 @@
-//Sample Account (model)
+//Sample Account (models)
 
 export abstract class Account {
     private accountNumber: string;
@@ -20,7 +20,7 @@ export abstract class Account {
             this.balance += amount;
             console.log(`Deposit $${amount}. New balance: $${this.balance}`);
         } else {
-            console.log("Deposit amount has to be positive!");
+            console.log("Deposit amount has to be positive.");
         }
     }
 
