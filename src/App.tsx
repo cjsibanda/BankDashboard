@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Account } from './types/account';
 import { AccountCard } from './components/dashboard/AccountCard';
 import { Sidebar } from './components/layout/Sidebar';
-import { TransactionTable } from './dashboard/transactionTable';
+import { TransactionTable } from './components/dashboard/TransactionTable';
 import { MOCK_TRANSACTIONS } from './data/mockTransactions';
 
 const MOCK_ACCOUNTS: Account[] = [
@@ -13,7 +13,7 @@ const MOCK_ACCOUNTS: Account[] = [
     type: 'CHECKING',
     balanceCents: 856725,
     currency: 'CAD',
-    availableBalanceCents: 906070
+    availableBalanceCents: 856725,
   },
   {
     id: 'acc_2',
@@ -21,45 +21,43 @@ const MOCK_ACCOUNTS: Account[] = [
     nickname: 'Platinum Credit Card',
     type: 'CREDIT_CARD',
     balanceCents: -10050,
-    currency: 'CAD'
+    currency: 'CAD',
   },
   {
     id: 'acc_3',
-    accountNumberMasked: '...5076',
+    accountNumberMasked: '...5075',
     nickname: 'Diamond Access Card',
     type: 'CREDIT_CARD',
-    balanceCents: -2267,
+    balanceCents: -20550,
     currency: 'CAD',
   },
 ];
-
-
 
 export function App() {
   const [activeTab, setActiveTab] = useState('accounts');
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(null);
 
-  const selectedAccount = MOCK_ACCOUNTS.find((acc) =>acc.id === selectedAccountId);
+  const selectedAccount = MOCK_ACCOUNTS.find((acc) => acc.id === selectedAccountId);
   const currentTransactions = selectedAccountId ? MOCK_TRANSACTIONS[selectedAccountId] || [] : [];
 
   return (
     <div className="flex flex-col h-screen bg-slate-50 text-slate-900 font-sans">
-      {/*Header*/}
+      {/* Header */}
       <header className="h-16 bg-slate-900 text-white flex justify-between items-center px-6 shadow-md z-10">
         <div className="flex items-center">
-          <span className="text-x1 font-bold tracking-wide">
+          <span className="text-xl font-bold tracking-wide">
             Sibanda<span className="bg-white text-emerald-800 text-xs px-1.5 py-0.5 rounded ml-1.5 font-extrabold">BANKING</span>
           </span>
         </div>
-        <div className="flex items-center gep-4 text-sm">
+        <div className="flex items-center gap-4 text-sm">
           <span>Hello, Mr. Sibanda</span>
-          <button className="border border-white/45 hover:bg-white/10 text-white px-3 py-1.5 rounded transition-colors text-xs font-semibold" >
+          <button className="border border-white/45 hover:bg-white/10 text-white px-3 py-1.5 rounded transition-colors text-xs font-semibold">
             Sign Out
           </button>
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Main Container */}
       <div className="flex flex-1 overflow-hidden">
         <Sidebar activeTab={activeTab} onSelectTab={setActiveTab} />
 
@@ -68,7 +66,7 @@ export function App() {
           {selectedAccount ? (
             <TransactionTable
               account={selectedAccount}
-              transitions={currentTransactions}
+              transactions={currentTransactions}
               onBack={() => setSelectedAccountId(null)}
             />
           ) : (
@@ -77,6 +75,7 @@ export function App() {
                 <h1 className="text-2xl font-bold text-slate-900">Accounts Overview</h1>
                 <p className="text-sm text-slate-500">Manage your primary balances and assets in Sibanda Banking.</p>
               </header>
+
               <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {MOCK_ACCOUNTS.map((account) => (
                   <AccountCard
@@ -86,20 +85,22 @@ export function App() {
                   />
                 ))}
               </section>
-              </>
+            </>
           )}
         </main>
 
-        {/* Right Information Panel */}
-        <aside>
-          <div>
-            <h2>The Aside</h2>
-            <p>Right Information Panel Text</p>
+        {/* Right Info Panel */}
+        <aside className="w-72 p-6 bg-slate-50 border-l border-slate-200 hidden lg:block">
+          <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-sm">
+            <h2 className="text-sm font-semibold text-slate-800">Security Status</h2>
+            <p className="text-emerald-700 font-semibold text-sm my-2 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+              Protected & Encrypted
+            </p>
+            <small className="text-xs text-slate-400 block">Session ID: 8F92-A10X</small>
           </div>
         </aside>
-
       </div>
-
     </div>
   );
 }
