@@ -42,7 +42,46 @@ export function App() {
 
   const selectedAccount = MOCK_ACCOUNTS.find((acc) => acc.id === selectedAccountId);
   const currentTransactions = selectedAccountId ? MOCK_TRANSACTIONS[selectedAccountId] || [] : [];
+  
+  //Helper to render the correct tab based on the active tab
+  const renderMainContent = () => {
+    //If an account is selected in 'accounts' tab
+    // show it ledger detail view
+    if (activeTab === 'accounts' selectedAccount) {
+      return (
+        <TransactionTable
+          account={selectedAccount}
+          transactions={currentTransactions}
+          onBack={() => setSelectedAccountId(null)}
+        />
+      );
+    }
 
+    //Otherwise, render it based on the active sidebar tab
+    switch (activeTab) {
+      case 'accounts':
+        return (
+          <>
+            <header>
+              <h1>Accounts Overview</h1>
+              <p>Manage your primary balances and assets in Sibanda Banking.</p>
+            </header>
+
+            <section>
+              {MOCK_ACCOUNTS.map((account) => (
+                <AccountCard
+                  key={account.id}
+                  account={account}
+                  onClick={(id) => {
+                    setSelectedAccountId(id);
+                  }}
+                />
+              ))}
+            </section>
+          </>
+        );
+    }
+  }
 
   return (
     <div className="flex flex-col h-screen bg-slate-50 text-slate-900 font-sans">
