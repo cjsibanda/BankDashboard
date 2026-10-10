@@ -12,6 +12,4 @@ export const StatementsView: React.FC = () => {
     );
 };
 
-//////
-import React from 'react';
 
