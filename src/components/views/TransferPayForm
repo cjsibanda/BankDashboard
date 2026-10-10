@@ -1,0 +1,12 @@
+// The Transfer & Pay Form Component
+// Will handle input state & validate sufficient funds
+
+import React, { useState} from "react";
+import type { Account } from  '../../types/account';
+import type { TranserFormData, TransferErrorState } from '../../types.transfer';
+import { formatCurrency } from '../../utils/formatters';
+
+interface TransferPayFormProps {
+    accounts: Account[];
+    onExecuteTransfer: (transfer: TransferFormData) => boolean;
+}
