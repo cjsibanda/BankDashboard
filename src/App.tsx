@@ -4,6 +4,9 @@ import { AccountCard } from './components/dashboard/AccountCard';
 import { Sidebar } from './components/layout/Sidebar';
 import { TransactionTable } from './components/dashboard/TransactionTable';
 import { MOCK_TRANSACTIONS } from './data/mockTransactions';
+import { TransferPayView } from './components/views/TransferPayView';
+import { InvestmentsView } from './components/views/InvestmentsView';
+import { StatementsView } from './components/views/StatementsView';
 
 const MOCK_ACCOUNTS: Account[] = [
   {
@@ -39,6 +42,7 @@ export function App() {
 
   const selectedAccount = MOCK_ACCOUNTS.find((acc) => acc.id === selectedAccountId);
   const currentTransactions = selectedAccountId ? MOCK_TRANSACTIONS[selectedAccountId] || [] : [];
+
 
   return (
     <div className="flex flex-col h-screen bg-slate-50 text-slate-900 font-sans">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TransferPerView: React.FC = () => {
+export const TransferPayView: React.FC = () => {
     return (
         <div>
             <h2>Transfer and Pay</h2>
