@@ -50,7 +50,7 @@ export function App() {
     if (activeTab === 'accounts' selectedAccount) {
       return (
         <TransactionTable
-          account={selectedAccount}
+          account={selectedAccount} //<-- check this later
           transactions={currentTransactions}
           onBack={() => setSelectedAccountId(null)}
         />
@@ -80,6 +80,14 @@ export function App() {
             </section>
           </>
         );
+      case 'transfers':
+        return <TransferPayView />;
+      case 'investments':
+        return <InvestmentsView />;
+      case 'statements':
+        return <StatementsView />;
+      default:
+        return <div>Page not found</div>
     }
   }
 
