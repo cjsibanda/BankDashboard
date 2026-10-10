@@ -10,3 +10,23 @@ interface TransferPayFormProps {
     accounts: Account[];
     onExecuteTransfer: (transfer: TransferFormData) => boolean;
 }
+
+export const TransferPayForm: React.FC<TransferPayFormProps> = ({ 
+    accounts, onExecuteTransfer
+}) => {
+    const [formData, setFormData] = useState<TransferFormData>({
+        sourceAccountId: accounts[0]?.id || '',
+        destinationAccountId: accounts.length > 1 ? accounts[1].id : '',
+        amountDollars: '',
+        memo: '',
+    });
+
+    const [errors, setErrors] = useState<TransferErrorState>({});
+    const [successMessage, setSuccessMEssage] = useState<string | null>(null);
+
+    const selectedSourceAccount = accounts.find((acc) => acc.id === formData.sourceAccountId);
+
+    const handleChange = (field: keyof TrnaferFormData, value: string) => {
+        //need setFormData, setErrors, setSuccessMEssage
+    }
+}
