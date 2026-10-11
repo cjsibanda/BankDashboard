@@ -35,6 +35,31 @@ export const TransferPayForm: React.FC<TransferPayFormProps> = ({
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const newErrors: TransferErrorState = {};
+
+        // Validation: The accounts must be different
+        if (formData.sourceAccountId === formData.destinationAccountId) {
+            newErrors.destinationAccountID = 'Source and destination accounts cannot be the same.';
+        }
+
+        // Validation: Amount parsing & positive check
+        const parsedAmountFloat = parseFloat(formData.amountDollars);
+        if (isNaN(parsedAmountFloat) || parsedAmountFloat <= 0) {
+            newErrors.amountDollars = 'Please enter a valid transfer amount greater than $0.00.'; 
+        } else {
+            // Convert to integer cents to check gainst available balance
+            const amountCents = Math.round(parsedAmountFloat * 100);
+            if (selectedSourceAccount && amountCents > selectedSourceAccount.balanceCents) {
+                newErrors.amountDollars = `Insufficient funds. available balance is 
+                                           ${formatCurrency(selectedSourceAccount.balanceCents,
+                                            selectedSourceAccount.currency
+                                           )}.`;
+            }
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
     }
 
 }
