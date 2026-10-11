@@ -27,6 +27,14 @@ export const TransferPayForm: React.FC<TransferPayFormProps> = ({
     const selectedSourceAccount = accounts.find((acc) => acc.id === formData.sourceAccountId);
 
     const handleChange = (field: keyof TrnaferFormData, value: string) => {
-        //need setFormData, setErrors, setSuccessMEssage
+        setFormData((prev) => ({ ...prev, [field]: value }));
+        setErrors((prev) => ({ ...prev, [field]: undefined, general: undefined }));
+        setSuccessMessage(null);
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        const newErrors: TransferErrorState = {};
     }
+
 }
