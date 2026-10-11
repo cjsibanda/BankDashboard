@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import type { Account } from './types/account';
+import type { TransferFormData } from './types/transfer';
 import { AccountCard } from './components/dashboard/AccountCard';
 import { Sidebar } from './components/layout/Sidebar';
 import { TransactionTable } from './components/dashboard/TransactionTable';
-import { MOCK_TRANSACTIONS } from './data/mockTransactions';
+import { MOCK_TRANSACTIONS as initialTransactions } from './data/mockTransactions';
 import { TransferPayView } from './components/views/TransferPayView';
 import { InvestmentsView } from './components/views/InvestmentsView';
 import { StatementsView } from './components/views/StatementsView';
+import { TransferPayForm } from './components/views/TransferPayForm';
 
-const MOCK_ACCOUNTS: Account[] = [
+const INITIAL_ACCOUNTS: Account[] = [
   {
     id: 'acc_1',
     accountNumberMasked: '...1234',
@@ -28,10 +30,10 @@ const MOCK_ACCOUNTS: Account[] = [
   },
   {
     id: 'acc_3',
-    accountNumberMasked: '...5075',
-    nickname: 'Diamond Access Card',
+    accountNumberMAsked: '...5070',
+    nickname: "Diamond Access Card",
     type: 'CREDIT_CARD',
-    balanceCents: -200550,
+    balanceCents: -25075,
     currency: 'CAD',
   },
 ];
@@ -39,55 +41,129 @@ const MOCK_ACCOUNTS: Account[] = [
 export function App() {
   const [activeTab, setActiveTab] = useState('accounts');
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(null);
+  const [accounts, setAccounts] = useState<Account[]>(INITIAL_ACCOUNTS);
+  const [transactions, setTransactions] = useState(initialTransactions);
 
-  const selectedAccount = MOCK_ACCOUNTS.find((acc) => acc.id === selectedAccountId);
-  const currentTransactions = selectedAccountId ? MOCK_TRANSACTIONS[selectedAccountId] || [] : [];
-  
-  //Helper to render the correct tab based on the active tab
+  const selectedAccount = accounts.find((acc) => acc.id === selectedAccountId);
+  const currentTransactions = selectedAccountId ? transactions[selectedAccountId] || [] : [];
+
+  // Handles transfer execution [cent arithmetic and ledger logging]
+  const handleExecuteTransfer = (transfer: TransferFormData): boolean => {
+    const amountCents = Math.round(parseFloat(transfer.amountDollars) * 100);
+    const today = new Date().toISOString().split('T')[0];
+
+    setAccounts((prevAccounts) =>
+      prevAccounts.map((acc) => {
+        if (acc.id === transfer.sourceAccountId) {
+          const newBalance = acc.balanceCents - amountCents;
+          return {
+            ...acc,
+            balanceCents: newBalance,
+            availableBalanceCents: acc.availableBalanceCents !== undefined ? newBalance : undefined,
+          };
+        }
+        if (acc.id === transfer.destinationAccountId) {
+          const newBalance = acc.balanceCents + amountCents;
+          return {
+            ...acc,
+            balanceCents: newBalance,
+            availableBalanceCents: acc.availableBalanceCents !== undefined ? newBalance : undefined,
+          };
+        }
+        return acc;
+      })
+    );
+
+    // Appends the transaction log entries
+    const sourceAccount = accounts.find(a => a.id === transfer.sourceAccountId);
+    const destAccount = accounts.find(a => a.id === transfer.destinationAccountId);
+
+    const memoText = transfer.memo ? ` - ${transfer.memo}` : '';
+
+    setTransactions((prev) => {
+      const updated = { ...prev };
+      
+      // Debit record for source
+      if (updated[transfer.sourceAccountId]) {
+        updated[transfer.sourceAccountId] = [
+          {
+            id: `tx_${Date.now()}_src`,
+            accountId: transfer.sourceAccountId,
+            date: today,
+            description: `Transfer to ${destAccount?.nickname || 'Account'}${memoText}`,
+            amountCents: -amountCents,
+            type: 'DEBIT',
+            status: 'POSTED',
+          },
+          ...updated[transfer.sourceAccountId],
+        ];
+      }
+
+      // Credit record for destination
+      if (updated[transfer.destinationAccountId]) {
+        updated[transfer.destinationAccountId] = [
+          {
+            id: `tx_${Date.now()}_dst`,
+            accountId: transfer.destinationAccountId,
+            date: today,
+            description: `Transfer from ${sourceAccount?.nickname || 'Account'}${memoText}`,
+            amountCents: amountCents,
+            type: 'CREDIT',
+            status: 'POSTED',
+          },
+          ...updated[transfer.destinationAccountId],
+        ];
+      }
+
+      return updated;
+    });
+
+    return true;
+  };
+
   const renderMainContent = () => {
-    //If an account is selected in 'accounts' tab
-    // show it ledger detail view
-    if (activeTab === 'accounts' selectedAccount) {
+    if (activeTab === 'accounts' && selectedAccount) {
       return (
         <TransactionTable
-          account={selectedAccount} //<-- check this later
+          account={selectedAccount}
           transactions={currentTransactions}
           onBack={() => setSelectedAccountId(null)}
         />
       );
     }
 
-    //Otherwise, render it based on the active sidebar tab
     switch (activeTab) {
       case 'accounts':
         return (
           <>
-            <header>
-              <h1>Accounts Overview</h1>
-              <p>Manage your primary balances and assets in Sibanda Banking.</p>
+            <header className="mb-6">
+              <h1 className="text-2xl font-bold text-slate-900">Accounts Overview</h1>
+              <p className="text-sm text-slate-500">Manage your primary balances and assets in Sibanda Banking.</p>
             </header>
 
-            <section>
-              {MOCK_ACCOUNTS.map((account) => (
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {accounts.map((account) => (
                 <AccountCard
                   key={account.id}
                   account={account}
-                  onClick={(id) => {
-                    setSelectedAccountId(id);
-                  }}
+                  onClick={(id) => setSelectedAccountId(id)}
                 />
               ))}
             </section>
           </>
         );
       case 'transfers':
-        return <TransferPayView />;
+        return (
+          <TransferPayView>
+            <TransferPayForm accounts={accounts} onExecuteTransfer={handleExecuteTransfer} />
+          </TransferPayView>
+        );
       case 'investments':
         return <InvestmentsView />;
       case 'statements':
         return <StatementsView />;
       default:
-        return <div>Page not found</div>
+        return <div className="text-slate-500">Page not found.</div>;
     }
   };
 
@@ -110,34 +186,17 @@ export function App() {
 
       {/* Main Container */}
       <div className="flex flex-1 overflow-hidden">
-        <Sidebar activeTab={activeTab} onSelectTab={setActiveTab} />
+        <Sidebar
+          activeTab={activeTab}
+          onSelectTab={(tabId) => {
+            setActiveTab(tabId);
+            setSelectedAccountId(null);
+          }}
+        />
 
         {/* Content Area */}
         <main className="flex-1 p-8 overflow-y-auto">
-          {selectedAccount ? (
-            <TransactionTable
-              account={selectedAccount}
-              transactions={currentTransactions}
-              onBack={() => setSelectedAccountId(null)}
-            />
-          ) : (
-            <>
-              <header className="mb-6">
-                <h1 className="text-2xl font-bold text-slate-900">Accounts Overview</h1>
-                <p className="text-sm text-slate-500">Manage your primary balances and assets in Sibanda Banking.</p>
-              </header>
-
-              <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {MOCK_ACCOUNTS.map((account) => (
-                  <AccountCard
-                    key={account.id}
-                    account={account}
-                    onClick={(id) => setSelectedAccountId(id)}
-                  />
-                ))}
-              </section>
-            </>
-          )}
+          {renderMainContent()}
         </main>
 
         {/* Right Info Panel */}
