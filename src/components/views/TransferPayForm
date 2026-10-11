@@ -60,6 +60,17 @@ export const TransferPayForm: React.FC<TransferPayFormProps> = ({
             setErrors(newErrors);
             return;
         }
-    }
+
+        //This will execute the trnasfer through the parent handler
+        const success = onExecuteTransfer(formData);
+        if (success) {
+            setSuccessMessage(`Successfully transferred $${formData.amountDollars} CAD.`);
+            setFormData((prev) => ({ ...prev, amountDollars: '', memo: ''}));
+        } else {
+            setErrors({general: 'Transaction failed due to a security or processing error. Try again.' });
+        }
+    };
+
+    
 
 }
