@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-export const TransferPayView: React.FC = () => {
+interface TransferPayViewProps {
+    children?: ReactNode;
+}
+
+export const TransferPayView: React.FC<TransferPayViewProps> = ({ children }) => {
     return (
         <div>
-            <h2>Transfer and Pay</h2>
-            <p>Send funds securely between your accounts or pay bills.</p>
-            <div>
-                [ Transfer & Pay Form Component will render here right here ]
-            </div>
+            {children || (
+                <div>
+                    <h2>Transfer & Pay</h2>
+                    <p>Send funds securely between your accounts or pay bills</p>
+                </div>
+            )}
         </div>
     );
 };
+
 
