@@ -54,7 +54,7 @@ export function App() {
 
     setAccounts((prevAccounts) =>
       prevAccounts.map((acc) => {
-        if (acc.id === transfer.sourceAccountId) {
+        if (acc.id === transfer.sourceAccountID) {
           const newBalance = acc.balanceCents - amountCents;
           return {
             ...acc,
