@@ -1,6 +1,6 @@
 import type { Holding } from '../types/investment';
 
-export const MOCK_HOLDING: Holding[] = [
+export const MOCK_HOLDINGS: Holding[] = [
     {
         id: 'h_1',
         ticker: 'ZSCO',
