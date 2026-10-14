@@ -30,7 +30,7 @@ const INITIAL_ACCOUNTS: Account[] = [
   },
   {
     id: 'acc_3',
-    accountNumberMAsked: '...5070',
+    accountNumberMasked: '...5070',
     nickname: "Diamond Access Card",
     type: 'CREDIT_CARD',
     balanceCents: -25075,

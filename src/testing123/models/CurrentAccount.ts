@@ -1,4 +1,4 @@
-// Sampe Current Account file (models)
+// Sample Current Account file (models)
 import { Account } from './Account' //<--- check this later
 
 export class CurrentAccount extends Account {
