@@ -10,7 +10,7 @@ interface TransferPayFormProps {
 
 export const TransferPayForm: React.FC<TransferPayFormProps> = ({ accounts, onExecuteTransfer }) => {
   const [formData, setFormData] = useState<TransferFormData>({
-    sourceAccountId: accounts[0]?.id || '',
+    sourceAccountID: accounts[0]?.id || '',
     destinationAccountId: accounts.length > 1 ? accounts[1].id : '',
     amountDollars: '',
     memo: '',
@@ -19,7 +19,7 @@ export const TransferPayForm: React.FC<TransferPayFormProps> = ({ accounts, onEx
   const [errors, setErrors] = useState<TransferErrorState>({});
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const selectedSourceAccount = accounts.find((acc) => acc.id === formData.sourceAccountId);
+  const selectedSourceAccount = accounts.find((acc) => acc.id === formData.sourceAccountID);
 
   const handleChange = (field: keyof TransferFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -32,7 +32,7 @@ export const TransferPayForm: React.FC<TransferPayFormProps> = ({ accounts, onEx
     const newErrors: TransferErrorState = {};
 
     // Validation: Accounts must be different
-    if (formData.sourceAccountId === formData.destinationAccountId) {
+    if (formData.sourceAccountID === formData.destinationAccountId) {
       newErrors.destinationAccountId = 'Source and destination accounts cannot be the same.';
     }
 
@@ -88,8 +88,8 @@ export const TransferPayForm: React.FC<TransferPayFormProps> = ({ accounts, onEx
           </label>
           <select
             id="sourceAccount"
-            value={formData.sourceAccountId}
-            onChange={(e) => handleChange('sourceAccountId', e.target.value)}
+            value={formData.sourceAccountID}
+            onChange={(e) => handleChange('sourceAccountID', e.target.value)}
             className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm"
           >
             {accounts.map((acc) => (
