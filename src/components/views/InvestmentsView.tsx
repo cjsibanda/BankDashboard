@@ -60,6 +60,28 @@ export const InvestmentsView: React.FC = () => {
         </div>
       </div>
 
+      {/* Visual Allocation Bar */}
+      <div>
+        <div>
+          <h3>Asset Class Allocation</h3>
+          <span>Balanced Diversified Portfolio</span>
+        </div>
+
+        {/* Multi-Segmented Progress Bar */}
+        <div>
+          <div></div>
+        </div>
+
+        {/* Legend */}
+        <div>
+          <span>ETFs (45%)</span>
+          <span>Equities (30%)</span>
+          <span>Fixed Income (15%)</span>
+          <span>Cash (10%)</span>
+        </div>
+      </div>
+      
+
       {/* Holdings Table */}
       <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
         <div className="p-6 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
