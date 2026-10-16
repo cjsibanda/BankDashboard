@@ -81,6 +81,29 @@ export const InvestmentsView: React.FC = () => {
         </div>
       </div>
       
+      {/* Visual Allocation Bar */}
+      <div className="bg-white p-6 rounded-xl border border-slate-200/80 shadow-xs">
+        <div className="flex justify-between items-center mb-3">
+          <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider">Asset Class Allocation</h3>
+          <span className="text-xs text-slate-400">Balanced Diversified Portfolio</span>
+        </div>
+  
+        {/* Multi-segmented Progress Bar */}
+        <div className="h-3 w-full rounded-full bg-slate-100 overflow-hidden flex gap-0.5">
+          <div className="bg-emerald-600 h-full" style={{ width: '45%' }} title="ETFs (45%)"></div>
+          <div className="bg-indigo-600 h-full" style={{ width: '30%' }} title="Equities (30%)"></div>
+          <div className="bg-amber-500 h-full" style={{ width: '15%' }} title="Fixed Income (15%)"></div>
+          <div className="bg-slate-400 h-full" style={{ width: '10%' }} title="Cash (10%)"></div>
+        </div>
+
+        {/* Legend */}
+        <div className="flex flex-wrap gap-4 mt-3 text-xs font-medium text-slate-600">
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> ETFs (45%)</span>
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-indigo-600"></span> Equities (30%)</span>
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Fixed Income (15%)</span>
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-slate-400"></span> Cash (10%)</span>
+        </div>
+      </div>
 
       {/* Holdings Table */}
       <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
