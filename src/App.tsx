@@ -169,18 +169,37 @@ export function App() {
 
   return (
     <div className="flex flex-col h-screen bg-slate-50 text-slate-900 font-sans">
-      {/* Header */}
-      <header className="h-16 bg-slate-900 text-white flex justify-between items-center px-6 shadow-md z-10">
-        <div className="flex items-center">
-          <span className="text-xl font-bold tracking-wide">
-            Sibanda<span className="bg-white text-emerald-800 text-xs px-1.5 py-0.5 rounded ml-1.5 font-extrabold">BANKING</span>
-          </span>
+      {/* Professional Header Banner */}
+      <header className="h-16 bg-slate-900 text-white flex justify-between items-center px-6 shadow-md z-10 border-b border-slate-800">
+        <div className="flex items-center gap-6">
+          <div className="flex items-center">
+            <span className="text-xl font-bold tracking-wide text-white">
+              Sibanda<span className="bg-emerald-600 text-white text-xs px-1.5 py-0.5 rounded ml-1.5 font-extrabold tracking-wider">BANKING</span>
+            </span>
+          </div>
+
+          {/* Metric Badge Pill in Header */}
+          <div className="hidden md:flex items-center gap-4 border-l border-slate-800 pl-6 text-xs">
+            <div>
+              <span className="text-slate-400 block text-[10px] uppercase font-semibold">Total Liquidity</span>
+              <span className="text-emerald-400 font-bold font-mono">$8,567.25 CAD</span>
+            </div>
+            <div className="w-px h-6 bg-slate-800"></div>
+            <div>
+              <span className="text-slate-400 block text-[10px] uppercase font-semibold">Portfolio Value</span>
+              <span className="text-white font-bold font-mono">$89,450.00 CAD</span>
+            </div>
+          </div>
         </div>
+
         <div className="flex items-center gap-4 text-sm">
-          <span>Hello, Mr. Sibanda</span>
-          <button className="border border-white/45 hover:bg-white/10 text-white px-3 py-1.5 rounded transition-colors text-xs font-semibold">
-            Sign Out
-          </button>
+          <div className="text-right hidden sm:block">
+            <span className="block text-xs font-semibold text-white">CJ Sibanda</span>
+            <span className="block text-[10px] text-slate-400">Enterprise Checking & Portfolio</span>
+          </div>
+          <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center gap-1 justify-center text-xs font-bold border border-emerald-500 shadow-xs">
+            CS
+          </div>
         </div>
       </header>
 
