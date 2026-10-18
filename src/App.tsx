@@ -4,6 +4,7 @@ import type { TransferFormData } from './types/transfer';
 import { AccountCard } from './components/dashboard/AccountCard';
 import { Sidebar } from './components/layout/Sidebar';
 import { MobileDrawer } from './components/layout/MobileDrawer';
+import { Footer } from './components/layout/Footer';
 import { TransactionTable } from './components/dashboard/TransactionTable';
 import { MOCK_TRANSACTIONS as initialTransactions } from './data/mockTransactions';
 import { TransferPayView } from './components/views/TransferPayView';
@@ -243,8 +244,11 @@ export function App() {
         />
 
         {/* Content Area */}
-        <main className="flex-1 p-4 sm:p-8 overflow-y-auto">
-          {renderMainContent()}
+        <main className="flex-1 p-4 sm:p-8 overflow-y-auto flex flex-col justify-between">
+          <div>
+            {renderMainContent()}
+          </div>
+          <Footer />
         </main>
 
         {/* Right Info Panel (Desktop screens) */}

@@ -1,5 +1,5 @@
 export interface TransferFormData {
-    sourceAccountID: string;
+    sourceAccountId: string;
     destinationAccountId: string;
     amountDollars: string; //<-- stored as string input and parsed to string
     memo: string;
