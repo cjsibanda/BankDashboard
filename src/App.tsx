@@ -233,7 +233,7 @@ export function App() {
         />
 
         {/* Mobile Slide-Out Drawer (hidden now)*/}
-      {false && (  
+       
         <MobileDrawer
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
@@ -243,7 +243,7 @@ export function App() {
             setSelectedAccountId(null);
           }}
         />
-        )}
+      
 
         {/* Content Area */}
         <main className="flex-1 p-4 sm:p-8 overflow-y-auto flex flex-col justify-between">
