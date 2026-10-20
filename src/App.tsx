@@ -224,6 +224,7 @@ export function App() {
       {/* Main Container */}
       <div className="flex flex-1 overflow-hidden">
         {/* Desktop Sidebar */}
+        <div className="hidden hidden lg:flex h-full shrink-0 lg:block">
         <Sidebar
           activeTab={activeTab}
           onSelectTab={(tabId) => {
@@ -231,8 +232,9 @@ export function App() {
             setSelectedAccountId(null);
           }}
         />
+      </div>
 
-        {/* Mobile Slide-Out Drawer (hidden now)*/}
+        {/* Mobile Slide-Out Drawer */}
        
         <MobileDrawer
           isOpen={isMobileMenuOpen}
